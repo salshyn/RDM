@@ -241,7 +241,7 @@ section.block{padding:90px 0}
 /* ===== About / story ===== */
 .about{background:var(--bg-soft)}
 .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
-.about-image{min-height:420px;border-radius:6px;background:url('https://images.unsplash.com/photo-1530124566582-a618bc2615dc?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat}
+.about-image{min-height:420px;border-radius:6px;background:url('norah2.jpeg') center/cover no-repeat}
 .about h2{font-family:'Roboto Condensed',sans-serif;font-size:38px;font-weight:700;text-transform:uppercase;color:var(--blue-deep);margin-bottom:14px;line-height:1.1}
 .about h2 .accent{color:var(--blue)}
 .about p{color:var(--ink-soft);margin-bottom:14px;font-size:15px}
