@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Best Moving Company in NYC | FlatRate-style Movers</title>
+<style>
+  :root{
+    --red:#e21f26;
+    --red-dark:#b8161c;
+    --ink:#1a1a1a;
+    --ink-soft:#333;
+    --muted:#666;
+    --line:#e5e5e5;
+    --bg-soft:#f6f6f6;
+    --gold:#c9a14a;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Helvetica Neue',Arial,sans-serif;
+    color:var(--ink);
+    line-height:1.5;
+    background:#fff;
+  }
+  a{color:inherit;text-decoration:none}
+  img{max-width:100%;display:block}
+  .container{max-width:1200px;margin:0 auto;padding:0 20px}
+
+  /* ===== Top utility bar ===== */
+  .top-bar{
+    background:var(--ink);
+    color:#fff;
+    font-size:12px;
+    padding:8px 0;
+  }
+  .top-bar .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+  .top-bar nav ul{display:flex;gap:18px;list-style:none;flex-wrap:wrap}
+  .top-bar nav a{opacity:.85;transition:opacity .2s}
+  .top-bar nav a:hover{opacity:1;color:var(--red)}
+  .top-bar .login a{color:#fff}
+  .top-bar .login a:hover{color:var(--red)}
+
+  /* ===== Header ===== */
+  .header{
+    background:#fff;
+    border-bottom:1px solid var(--line);
+    position:sticky;top:0;z-index:50;
+  }
+  .header .container{
+    display:flex;align-items:center;justify-content:space-between;
+    padding-top:14px;padding-bottom:14px;gap:20px;
+  }
+  .logo{
+    font-weight:900;font-size:24px;letter-spacing:.5px;color:var(--red);
+    display:flex;align-items:center;gap:6px;
+  }
+  .logo span{color:var(--ink)}
+  .main-nav ul{display:flex;gap:26px;list-style:none}
+  .main-nav a{
+    font-size:13px;font-weight:700;letter-spacing:.5px;
+    text-transform:uppercase;
+    padding:8px 0;border-bottom:2px solid transparent;
+    transition:border-color .2s,color .2s;
+  }
+  .main-nav a:hover{color:var(--red);border-color:var(--red)}
+  .header-cta{display:flex;align-items:center;gap:14px}
+  .phone{font-weight:800;color:var(--red);font-size:15px;white-space:nowrap}
+  .btn{
+    display:inline-block;border:none;cursor:pointer;
+    padding:12px 22px;font-weight:700;font-size:13px;
+    text-transform:uppercase;letter-spacing:.6px;
+    border-radius:2px;transition:transform .15s,background .2s;
+  }
+  .btn-primary{background:var(--red);color:#fff}
+  .btn-primary:hover{background:var(--red-dark);transform:translateY(-1px)}
+  .btn-outline{background:transparent;border:2px solid #fff;color:#fff}
+  .btn-outline:hover{background:#fff;color:var(--ink)}
+  .menu-toggle{display:none;background:none;border:none;cursor:pointer;font-size:22px;color:var(--ink)}
+
+  /* ===== Hero ===== */
+  .hero{
+    position:relative;color:#fff;
+    background:
+      linear-gradient(rgba(20,20,20,.55),rgba(20,20,20,.65)),
+      url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+    padding:90px 0 110px;
+  }
+  .hero-grid{
+    display:grid;grid-template-columns:1.1fr .9fr;gap:50px;align-items:center;
+  }
+  .hero h1{font-size:54px;line-height:1.05;font-weight:900;letter-spacing:-.5px;margin-bottom:18px}
+  .hero h1 em{color:var(--red);font-style:normal}
+  .hero .sub{font-size:20px;font-weight:300;margin-bottom:30px;max-width:520px;color:#f0f0f0}
+  .hero ul.proof{list-style:none;display:flex;flex-wrap:wrap;gap:18px 28px;margin-bottom:30px}
+  .hero ul.proof li{font-size:14px;display:flex;align-items:center;gap:8px}
+  .hero ul.proof li::before{content:"✓";color:var(--red);font-weight:900}
+
+  /* Quote card */
+  .quote-card{
+    background:#fff;color:var(--ink);border-radius:6px;
+    padding:30px;box-shadow:0 20px 60px rgba(0,0,0,.35);
+  }
+  .quote-card h3{font-size:22px;margin-bottom:6px;font-weight:800}
+  .quote-card .qsub{font-size:14px;color:var(--muted);margin-bottom:20px}
+  .steps{display:flex;gap:6px;margin-bottom:20px}
+  .step-dot{flex:1;height:4px;background:var(--line);border-radius:2px;transition:background .25s}
+  .step-dot.active{background:var(--red)}
+  .quote-step{display:none}
+  .quote-step.active{display:block}
+  .form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
+  .form-row.full{grid-template-columns:1fr}
+  .field label{display:block;font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;margin-bottom:6px}
+  .field input,.field select{
+    width:100%;padding:12px 14px;border:1px solid var(--line);
+    border-radius:3px;font-size:14px;font-family:inherit;background:#fff;
+    transition:border-color .2s;
+  }
+  .field input:focus,.field select:focus{outline:none;border-color:var(--red)}
+  .quote-actions{display:flex;justify-content:space-between;align-items:center;margin-top:8px}
+  .link-back{background:none;border:none;color:var(--muted);cursor:pointer;font-size:13px;padding:8px 0}
+  .link-back:hover{color:var(--red)}
+  .or-call{display:block;text-align:center;font-size:13px;color:var(--muted);margin-top:14px}
+  .or-call a{color:var(--red);font-weight:700}
+  .quote-success{text-align:center;padding:20px 0}
+  .quote-success .check{
+    width:56px;height:56px;border-radius:50%;background:var(--red);color:#fff;
+    display:flex;align-items:center;justify-content:center;font-size:28px;
+    margin:0 auto 14px;
+  }
+
+  /* ===== Awards strip ===== */
+  .awards{background:var(--bg-soft);padding:32px 0}
+  .awards .container{display:flex;justify-content:space-around;align-items:center;flex-wrap:wrap;gap:24px;text-align:center}
+  .award{font-size:13px;color:var(--muted);max-width:200px}
+  .award strong{display:block;color:var(--ink);font-size:15px;margin-top:4px}
+
+  /* ===== Section base ===== */
+  section{padding:80px 0}
+  .section-head{text-align:center;max-width:760px;margin:0 auto 50px}
+  .section-head h2{font-size:38px;font-weight:900;margin-bottom:14px;letter-spacing:-.3px}
+  .section-head h2 em{color:var(--red);font-style:normal}
+  .section-head p{color:var(--muted);font-size:16px}
+
+  /* ===== Services grid ===== */
+  .services{background:#fff}
+  .services-grid{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:24px;
+  }
+  .service-card{
+    border:1px solid var(--line);border-radius:6px;padding:34px 28px;
+    transition:transform .2s,box-shadow .2s,border-color .2s;
+    background:#fff;
+  }
+  .service-card:hover{
+    transform:translateY(-4px);
+    box-shadow:0 14px 30px rgba(0,0,0,.08);
+    border-color:transparent;
+  }
+  .service-icon{
+    width:54px;height:54px;border-radius:50%;background:#fdecec;
+    display:flex;align-items:center;justify-content:center;
+    color:var(--red);font-size:24px;margin-bottom:18px;
+  }
+  .service-card h3{font-size:20px;margin-bottom:10px;font-weight:800}
+  .service-card p{color:var(--muted);font-size:14px;margin-bottom:14px}
+  .service-card a.more{color:var(--red);font-weight:700;font-size:13px;text-transform:uppercase;letter-spacing:.6px}
+  .service-card a.more:hover{text-decoration:underline}
+
+  /* ===== Packages ===== */
+  .packages{background:var(--bg-soft)}
+  .pack-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+  .pack{
+    background:#fff;border-radius:6px;padding:28px 24px;
+    border-top:4px solid var(--line);
+    display:flex;flex-direction:column;
+    transition:transform .2s,box-shadow .2s;
+  }
+  .pack:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(0,0,0,.08)}
+  .pack.basic{border-top-color:#9aa0a6}
+  .pack.premium{border-top-color:var(--red)}
+  .pack.gold{border-top-color:var(--gold)}
+  .pack.elite{border-top-color:var(--ink)}
+  .pack .tier{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:6px}
+  .pack h3{font-size:18px;margin-bottom:10px;font-weight:800;line-height:1.25}
+  .pack p.lead{color:var(--muted);font-size:13px;margin-bottom:16px;min-height:54px}
+  .pack ul{list-style:none;margin-bottom:18px}
+  .pack ul li{
+    font-size:13px;color:var(--ink-soft);padding:6px 0 6px 22px;position:relative;
+  }
+  .pack ul li::before{
+    content:"✓";color:var(--red);position:absolute;left:0;top:6px;font-weight:800;
+  }
+  .pack .btn{margin-top:auto;text-align:center}
+
+  /* ===== Reviews ===== */
+  .reviews{background:#fff}
+  .ratings-row{
+    display:grid;grid-template-columns:repeat(5,1fr);gap:20px;
+    background:var(--bg-soft);border-radius:6px;padding:26px;margin-bottom:50px;
+    text-align:center;
+  }
+  .rating .platform{font-size:13px;color:var(--muted);margin-bottom:6px}
+  .rating .score{font-size:24px;font-weight:900;color:var(--ink)}
+  .rating .stars{color:#f5b400;font-size:14px;letter-spacing:2px}
+  .rating .count{font-size:11px;color:var(--muted);margin-top:2px}
+
+  .reviews-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  .review{
+    border:1px solid var(--line);border-radius:6px;padding:24px;
+    display:flex;flex-direction:column;gap:10px;background:#fff;
+  }
+  .review .stars{color:#f5b400;letter-spacing:2px}
+  .review .quote{font-size:15px;font-style:italic;color:var(--ink-soft);flex:1}
+  .review .who{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--muted)}
+  .review .avatar{
+    width:36px;height:36px;border-radius:50%;background:var(--red);color:#fff;
+    display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;
+  }
+
+  /* ===== Why us ===== */
+  .why{background:var(--ink);color:#fff}
+  .why .why-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:60px;align-items:center}
+  .why h2{font-size:36px;font-weight:900;margin-bottom:18px;line-height:1.1}
+  .why h2 em{color:var(--red);font-style:normal}
+  .why p{color:#bbb;margin-bottom:20px}
+  .why ul{list-style:none}
+  .why ul li{padding:10px 0 10px 28px;position:relative;color:#ddd;font-size:15px;border-bottom:1px solid #2a2a2a}
+  .why ul li::before{
+    content:"→";color:var(--red);position:absolute;left:0;top:10px;font-weight:800;
+  }
+  .why-image{
+    height:420px;border-radius:6px;
+    background:url('https://images.unsplash.com/photo-1530124566582-a618bc2615dc?auto=format&fit=crop&w=900&q=80') center/cover no-repeat;
+  }
+
+  /* ===== CTA ===== */
+  .cta{
+    background:linear-gradient(135deg,var(--red),var(--red-dark));
+    color:#fff;text-align:center;padding:70px 0;
+  }
+  .cta h2{font-size:36px;font-weight:900;margin-bottom:14px}
+  .cta p{font-size:17px;margin-bottom:26px;opacity:.95}
+  .cta .btn{background:#fff;color:var(--red);font-size:14px;padding:16px 32px}
+  .cta .btn:hover{background:var(--ink);color:#fff}
+
+  /* ===== Footer ===== */
+  footer{background:#0f0f0f;color:#aaa;padding:60px 0 20px;font-size:13px}
+  .foot-grid{display:grid;grid-template-columns:1.4fr repeat(4,1fr);gap:30px;margin-bottom:40px}
+  .foot h4{color:#fff;font-size:13px;text-transform:uppercase;letter-spacing:1px;margin-bottom:14px;font-weight:800}
+  .foot ul{list-style:none;display:flex;flex-direction:column;gap:8px}
+  .foot a:hover{color:var(--red)}
+  .foot .brand{color:#fff;font-weight:900;font-size:22px;margin-bottom:14px;display:block}
+  .foot .brand span{color:var(--red)}
+  .socials{display:flex;gap:10px;margin-top:14px}
+  .socials a{
+    width:34px;height:34px;border-radius:50%;background:#222;color:#fff;
+    display:flex;align-items:center;justify-content:center;transition:background .2s;
+    font-size:14px;font-weight:700;
+  }
+  .socials a:hover{background:var(--red)}
+  .legal{border-top:1px solid #1f1f1f;padding-top:18px;text-align:center;color:#666;font-size:12px}
+
+  /* ===== Responsive ===== */
+  @media (max-width:980px){
+    .main-nav,.top-bar nav{display:none}
+    .menu-toggle{display:block}
+    .hero{padding:60px 0 80px}
+    .hero-grid{grid-template-columns:1fr;gap:34px}
+    .hero h1{font-size:38px}
+    .services-grid{grid-template-columns:repeat(2,1fr)}
+    .pack-grid{grid-template-columns:repeat(2,1fr)}
+    .ratings-row{grid-template-columns:repeat(2,1fr);gap:18px}
+    .reviews-grid{grid-template-columns:1fr}
+    .why .why-grid{grid-template-columns:1fr}
+    .foot-grid{grid-template-columns:1fr 1fr}
+    .section-head h2{font-size:30px}
+  }
+  @media (max-width:560px){
+    .services-grid,.pack-grid,.foot-grid{grid-template-columns:1fr}
+    .form-row{grid-template-columns:1fr}
+    .ratings-row{grid-template-columns:1fr}
+    .header-cta .phone{display:none}
+  }
+</style>
+</head>
+<body>
+
+<!-- Top utility bar -->
+<div class="top-bar">
+  <div class="container">
+    <nav>
+      <ul>
+        <li><a href="#">NYC</a></li>
+        <li><a href="#">Manhattan</a></li>
+        <li><a href="#">Los Angeles</a></li>
+        <li><a href="#">San Francisco</a></li>
+        <li><a href="#">Miami</a></li>
+        <li><a href="#">Washington DC</a></li>
+      </ul>
+    </nav>
+    <div class="login">Manage your move online: <a href="#"><strong>Login</strong></a></div>
+  </div>
+</div>
+
+<!-- Header -->
+<header class="header">
+  <div class="container">
+    <a href="#" class="logo">Flat<span>Rate</span></a>
+    <nav class="main-nav">
+      <ul>
+        <li><a href="#services">Moving</a></li>
+        <li><a href="#">Storage</a></li>
+        <li><a href="#">Locations</a></li>
+        <li><a href="#">Box Store</a></li>
+        <li><a href="#">Services</a></li>
+        <li><a href="#">Company</a></li>
+        <li><a href="#">Resources</a></li>
+      </ul>
+    </nav>
+    <div class="header-cta">
+      <a href="tel:2129889292" class="phone">(212) 988-9292</a>
+      <a href="#quote" class="btn btn-primary">Free Quote</a>
+      <button class="menu-toggle" aria-label="Open menu">☰</button>
+    </div>
+  </div>
+</header>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="container hero-grid">
+    <div>
+      <h1>Move with Ease, with NYC's Best <em>Moving Company</em></h1>
+      <p class="sub">Get your FlatRate — it's all-inclusive and always guaranteed. Local, long-distance, and international movers since 1991.</p>
+      <ul class="proof">
+        <li>99.6% accurate quotes</li>
+        <li>30+ years of expertise</li>
+        <li>Licensed &amp; insured</li>
+        <li>4.8★ across 3,400+ reviews</li>
+      </ul>
+      <a href="#quote" class="btn btn-primary">Start your move</a>
+      &nbsp;
+      <a href="tel:2129889292" class="btn btn-outline">Call now</a>
+    </div>
+
+    <!-- Quote form card -->
+    <div class="quote-card" id="quote">
+      <h3>Start your seamless move</h3>
+      <p class="qsub">Get a free, no-obligation quote in minutes.</p>
+
+      <div class="steps">
+        <div class="step-dot active" data-step="1"></div>
+        <div class="step-dot" data-step="2"></div>
+        <div class="step-dot" data-step="3"></div>
+      </div>
+
+      <!-- Step 1 -->
+      <div class="quote-step active" data-step="1">
+        <div class="form-row">
+          <div class="field">
+            <label>Moving from</label>
+            <input type="text" placeholder="ZIP or city" id="from">
+          </div>
+          <div class="field">
+            <label>Moving to</label>
+            <input type="text" placeholder="ZIP or city" id="to">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="field">
+            <label>Move date</label>
+            <input type="date" id="date">
+          </div>
+          <div class="field">
+            <label>Home size</label>
+            <select id="size">
+              <option value="">Select…</option>
+              <option>Studio Apt</option>
+              <option>1 BR Apt</option>
+              <option>1 BR Apt - Large</option>
+              <option>2 BR Apt</option>
+              <option>3 BR Apt</option>
+              <option>4+ BR Apt</option>
+              <option>House</option>
+              <option>Commercial Move</option>
+            </select>
+          </div>
+        </div>
+        <div class="quote-actions">
+          <span></span>
+          <button class="btn btn-primary" data-next="2">Next</button>
+        </div>
+        <span class="or-call">or <a href="tel:2129889292">Call me now</a></span>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="quote-step" data-step="2">
+        <p style="font-size:14px;color:var(--muted);margin-bottom:14px">Who should we send the quote to?</p>
+        <div class="form-row full">
+          <div class="field">
+            <label>Name</label>
+            <input type="text" placeholder="Your name">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="field">
+            <label>Email</label>
+            <input type="email" placeholder="you@email.com">
+          </div>
+          <div class="field">
+            <label>Phone *</label>
+            <input type="tel" placeholder="(212) 555-0100">
+          </div>
+        </div>
+        <div class="quote-actions">
+          <button class="link-back" data-back="1">← Back</button>
+          <button class="btn btn-primary" data-next="3">Get my quote</button>
+        </div>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="quote-step" data-step="3">
+        <div class="quote-success">
+          <div class="check">✓</div>
+          <h3 style="margin-bottom:6px">Thank you!</h3>
+          <p style="color:var(--muted);font-size:14px">We've reserved a spot for you. A FlatRate specialist will call within the next business hour.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Awards strip -->
+<div class="awards">
+  <div class="container">
+    <div class="award"><strong>2025 Consumer Affairs</strong>Best Moving Company Winner</div>
+    <div class="award"><strong>GSA-Certified</strong>Approved Federal Mover</div>
+    <div class="award"><strong>BBB A+ Rated</strong>Accredited Business</div>
+    <div class="award"><strong>30+ Years</strong>In NYC &amp; Beyond</div>
+    <div class="award"><strong>$250 Off</strong>May Move Dates ($1,000+)</div>
+  </div>
+</div>
+
+<!-- Services -->
+<section class="services" id="services">
+  <div class="container">
+    <div class="section-head">
+      <h2>Choose NYC's <em>Premier</em> Moving Services</h2>
+      <p>From a single studio across town to a multi-home international relocation, we have a service crafted for the way you move.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon">🏙️</div>
+        <h3>Local Moving</h3>
+        <p>Customizable plans, flat-rate pricing, expert packing, and careful handling of furniture, floors, and hallways across all five boroughs.</p>
+        <a href="#" class="more">+ Learn more</a>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🛣️</div>
+        <h3>Long Distance</h3>
+        <p>Guaranteed arrival times and nationwide offices. From specialty packing to safe delivery, your belongings arrive exactly when promised.</p>
+        <a href="#" class="more">+ Learn more</a>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🌎</div>
+        <h3>International Moving</h3>
+        <p>Expertise in customs, import restrictions, and shipping regulations. Home-to-home worldwide relocation, smoothly handled.</p>
+        <a href="#" class="more">+ Learn more</a>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🏢</div>
+        <h3>Office Moving</h3>
+        <p>Night moves, floor planning, IT setup, liquidation, and warehousing. Our experts keep your business running with zero downtime.</p>
+        <a href="#" class="more">+ Learn more</a>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">⭐</div>
+        <h3>Elite White Glove</h3>
+        <p>Personal concierge, custom crates, photo inventory, and discreet handling for art, antiques, and high-value belongings.</p>
+        <a href="#" class="more">+ Learn more</a>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">📦</div>
+        <h3>Storage</h3>
+        <p>Secure, climate-controlled facilities with 24/7 monitoring, private access, and short- or long-term flexible plans.</p>
+        <a href="#" class="more">+ Learn more</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Packages -->
+<section class="packages">
+  <div class="container">
+    <div class="section-head">
+      <h2>Move with Ease: All-Inclusive <em>Packages</em></h2>
+      <p>Choose from a range of tailored options to simplify your relocation. Every package is fully guaranteed, with no surprises on moving day.</p>
+    </div>
+    <div class="pack-grid">
+      <div class="pack basic">
+        <div class="tier">Basic</div>
+        <h3>All you need in a move</h3>
+        <p class="lead">A fast, safe &amp; reliable NYC move at a reasonable price.</p>
+        <ul>
+          <li>Professional movers</li>
+          <li>Travel and labor included</li>
+          <li>Packing of fragile items</li>
+          <li>Furniture wrapping</li>
+          <li>Basic dismantling &amp; reassembly</li>
+        </ul>
+        <a href="#quote" class="btn btn-primary">Get Basic quote</a>
+      </div>
+      <div class="pack premium">
+        <div class="tier">Premium</div>
+        <h3>All-inclusive full-service move</h3>
+        <p class="lead">Full service at a high standard for an easy moving experience.</p>
+        <ul>
+          <li>Expert moving teams</li>
+          <li>Special handling &amp; packing</li>
+          <li>Dismantling &amp; reassembly</li>
+          <li>Floor, wall &amp; corner protection</li>
+          <li>Moving debris clean-up</li>
+        </ul>
+        <a href="#quote" class="btn btn-primary">Get Premium quote</a>
+      </div>
+      <div class="pack gold">
+        <div class="tier">Gold</div>
+        <h3>Complete move with packing &amp; unpacking</h3>
+        <p class="lead">Comprehensive service ideal for large moves &amp; busy schedules.</p>
+        <ul>
+          <li>Full packing in specialized boxes</li>
+          <li>Complete unpacking &amp; setup</li>
+          <li>Cohesive specialized teams</li>
+          <li>One-day pack &amp; move specialists</li>
+          <li>Full protection of items &amp; building</li>
+        </ul>
+        <a href="#quote" class="btn btn-primary">Get Gold quote</a>
+      </div>
+      <div class="pack elite">
+        <div class="tier">Elite</div>
+        <h3>True high-end luxury moving</h3>
+        <p class="lead">Elevate your move to extraordinary heights.</p>
+        <ul>
+          <li>Personal moving concierge</li>
+          <li>Tipping included</li>
+          <li>Photo inventory &amp; full valuation</li>
+          <li>Carpentry, IT &amp; A/V experts</li>
+          <li>Before &amp; after room replication</li>
+        </ul>
+        <a href="#quote" class="btn btn-primary">Get Elite quote</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Reviews -->
+<section class="reviews">
+  <div class="container">
+    <div class="section-head">
+      <h2>Customer Experiences: <em>NYC Moving Company</em> Earns High Praise</h2>
+      <p>Trusted by thousands of New Yorkers across every major review platform.</p>
+    </div>
+
+    <div class="ratings-row">
+      <div class="rating"><div class="platform">Google</div><div class="score">4.8</div><div class="stars">★★★★★</div><div class="count">1,339 reviews</div></div>
+      <div class="rating"><div class="platform">Birdeye</div><div class="score">4.7</div><div class="stars">★★★★★</div><div class="count">1,886 reviews</div></div>
+      <div class="rating"><div class="platform">Yellow Pages</div><div class="score">5.0</div><div class="stars">★★★★★</div><div class="count">40 reviews</div></div>
+      <div class="rating"><div class="platform">Trustpilot</div><div class="score">4.8</div><div class="stars">★★★★★</div><div class="count">75 reviews</div></div>
+      <div class="rating"><div class="platform">BBB</div><div class="score">4.8</div><div class="stars">★★★★★</div><div class="count">82 reviews</div></div>
+    </div>
+
+    <div class="reviews-grid">
+      <div class="review">
+        <div class="stars">★★★★★</div>
+        <p class="quote">"3rd time using FlatRate. They never disappoint and aim to please. See you guys next year for sure!"</p>
+        <div class="who">
+          <div class="avatar">S</div>
+          <div><strong>Stacy</strong> · New York · Nov 21, 2025</div>
+        </div>
+      </div>
+      <div class="review">
+        <div class="stars">★★★★★</div>
+        <p class="quote">"FlatRate movers are fast, careful, and thoughtful. The team listened to every requirement and delivered exactly as promised."</p>
+        <div class="who">
+          <div class="avatar">E</div>
+          <div><strong>Edna E.</strong> · New York · Aug 11, 2024</div>
+        </div>
+      </div>
+      <div class="review">
+        <div class="stars">★★★★★</div>
+        <p class="quote">"Norberto, Arnaldo and Julio arrived early, were incredibly efficient, kind and helpful. Would definitely recommend."</p>
+        <div class="who">
+          <div class="avatar">L</div>
+          <div><strong>Lauren F.</strong> · New York · Feb 18, 2024</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Why us -->
+<section class="why">
+  <div class="container why-grid">
+    <div>
+      <h2>Experience the <em>FlatRate</em> Advantage</h2>
+      <p>Stress-free moving services backed by three decades of NYC expertise. Every move is guaranteed, every price is locked, every detail is handled.</p>
+      <ul>
+        <li>Guaranteed pricing, on-time arrivals, flawlessly executed moves</li>
+        <li>Highly experienced NYC movers with 30+ years of expertise</li>
+        <li>Commitment to high-quality standards on every move</li>
+        <li>Complete range of moving &amp; storage services</li>
+        <li>Capable of handling complex moves anywhere in the world</li>
+      </ul>
+    </div>
+    <div class="why-image" aria-hidden="true"></div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta">
+  <div class="container">
+    <h2>Ready for a stress-free move?</h2>
+    <p>Get a free, no-obligation FlatRate quote in minutes.</p>
+    <a href="#quote" class="btn">Get my free quote</a>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="foot-grid">
+      <div class="foot">
+        <a href="#" class="brand">Flat<span>Rate</span></a>
+        <p>The #1 New York City moving company. Local, long-distance, and international moving and storage services from NYC's most trusted movers since 1991.</p>
+        <div class="socials">
+          <a href="#" aria-label="Facebook">f</a>
+          <a href="#" aria-label="Instagram">ig</a>
+          <a href="#" aria-label="YouTube">yt</a>
+          <a href="#" aria-label="Twitter">𝕏</a>
+        </div>
+      </div>
+      <div class="foot">
+        <h4>Moving</h4>
+        <ul>
+          <li><a href="#">Local Moving</a></li>
+          <li><a href="#">Long Distance</a></li>
+          <li><a href="#">International</a></li>
+          <li><a href="#">Commercial</a></li>
+          <li><a href="#">Elite White Glove</a></li>
+        </ul>
+      </div>
+      <div class="foot">
+        <h4>Locations</h4>
+        <ul>
+          <li><a href="#">NYC</a></li>
+          <li><a href="#">Los Angeles</a></li>
+          <li><a href="#">San Francisco</a></li>
+          <li><a href="#">Miami</a></li>
+          <li><a href="#">Washington DC</a></li>
+        </ul>
+      </div>
+      <div class="foot">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="#">FAQ</a></li>
+          <li><a href="#">Reviews</a></li>
+          <li><a href="#">Moving Glossary</a></li>
+          <li><a href="#">How to Pack</a></li>
+          <li><a href="#">Careers</a></li>
+        </ul>
+      </div>
+      <div class="foot">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="tel:2129889292">(212) 988-9292</a></li>
+          <li><a href="#">Customer Service</a></li>
+          <li><a href="#">Complaints &amp; Claims</a></li>
+          <li><a href="#">Loyalty Club</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="legal">© 2026 FlatRate-style Moving Demo · USDOT 488466 · MC 254162 · All rights reserved.</div>
+  </div>
+</footer>
+
+<script>
+  // Multi-step quote form
+  const card = document.getElementById('quote');
+  const dots = card.querySelectorAll('.step-dot');
+  const steps = card.querySelectorAll('.quote-step');
+  function goTo(n){
+    steps.forEach(s=>s.classList.toggle('active', s.dataset.step==n));
+    dots.forEach(d=>d.classList.toggle('active', d.dataset.step<=n));
+  }
+  card.querySelectorAll('[data-next]').forEach(b=>{
+    b.addEventListener('click', e=>{
+      e.preventDefault();
+      goTo(b.dataset.next);
+    });
+  });
+  card.querySelectorAll('[data-back]').forEach(b=>{
+    b.addEventListener('click', e=>{
+      e.preventDefault();
+      goTo(b.dataset.back);
+    });
+  });
+
+  // Mobile nav toggle (lightweight; just opens an overlay menu)
+  const toggle = document.querySelector('.menu-toggle');
+  const nav = document.querySelector('.main-nav');
+  toggle && toggle.addEventListener('click', ()=>{
+    if(nav.style.display==='block'){
+      nav.style.display='';
+    } else {
+      nav.style.cssText='display:block;position:absolute;top:100%;left:0;right:0;background:#fff;padding:18px 20px;border-bottom:1px solid var(--line);box-shadow:0 8px 18px rgba(0,0,0,.08);';
+      nav.querySelector('ul').style.cssText='flex-direction:column;gap:10px;';
+    }
+  });
+</script>
+
+</body>
+</html>
