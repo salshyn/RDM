@@ -217,18 +217,21 @@
 
       <!-- Sidebar quote form -->
       <aside class="sidebar">
-        <div class="side-quote" id="sidequote">
+        <form class="side-quote" id="sidequote" name="long-distance-quote" method="POST" data-netlify="true" netlify-honeypot="bot-field">
           <div class="qhead">
             <h3>Long Distance Quote</h3>
             <p>Free onsite or video estimate.</p>
           </div>
           <div class="qbody">
+            <input type="hidden" name="form-name" value="long-distance-quote">
+            <input type="hidden" name="subject" value="New long distance quote request - Rainy Day Movers">
+            <p hidden><label>Don't fill this out: <input name="bot-field"></label></p>
             <div class="row2">
-              <div class="field"><label>From (city/ZIP)</label><input type="text" placeholder="Seattle, WA"></div>
-              <div class="field"><label>To (city/ZIP)</label><input type="text" placeholder="Destination"></div>
+              <div class="field"><label>From (city/ZIP)</label><input type="text" name="moving_from" placeholder="Seattle, WA"></div>
+              <div class="field"><label>To (city/ZIP)</label><input type="text" name="moving_to" placeholder="Destination"></div>
             </div>
             <div class="field"><label>Move size *</label>
-              <select>
+              <select name="move_size" required>
                 <option value="">Select…</option>
                 <option>Studio</option>
                 <option>1 Bedroom</option>
@@ -238,15 +241,15 @@
                 <option>Office / Commercial</option>
               </select>
             </div>
-            <div class="field"><label>Estimated move date</label><input type="date"></div>
-            <div class="field"><label>Your name</label><input type="text" placeholder="Name"></div>
-            <div class="field"><label>Phone *</label><input type="tel" placeholder="(206) 555-0100"></div>
-            <div class="field"><label>Email</label><input type="email" placeholder="you@email.com"></div>
-            <div class="field"><label>Anything else we should know?</label><textarea rows="3" placeholder="Stairs, fragile items, timing constraints…"></textarea></div>
-            <button class="btn btn-primary" style="width:100%;padding:14px">Request my quote</button>
+            <div class="field"><label>Estimated move date</label><input type="date" name="move_date"></div>
+            <div class="field"><label>Your name</label><input type="text" name="full_name" placeholder="Name"></div>
+            <div class="field"><label>Phone *</label><input type="tel" name="phone" placeholder="(206) 555-0100" required></div>
+            <div class="field"><label>Email</label><input type="email" name="email" placeholder="you@email.com"></div>
+            <div class="field"><label>Anything else we should know?</label><textarea name="message" rows="3" placeholder="Stairs, fragile items, timing constraints…"></textarea></div>
+            <button type="submit" class="btn btn-primary" style="width:100%;padding:14px">Request my quote</button>
             <span class="or-call">or <a href="tel:+12065902288">call (206) 590-2288</a></span>
           </div>
-        </div>
+        </form>
       </aside>
     </div>
   </div>

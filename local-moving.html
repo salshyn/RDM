@@ -290,14 +290,17 @@
 
       <!-- Sidebar quote form -->
       <aside class="sidebar">
-        <div class="side-quote" id="sidequote">
+        <form class="side-quote" id="sidequote" name="local-moving-quote" method="POST" data-netlify="true" netlify-honeypot="bot-field">
           <div class="qhead">
             <h3>Get Your Free Quote</h3>
             <p>We'll call you back within the hour.</p>
           </div>
           <div class="qbody">
+            <input type="hidden" name="form-name" value="local-moving-quote">
+            <input type="hidden" name="subject" value="New local moving quote request - Rainy Day Movers">
+            <p hidden><label>Don't fill this out: <input name="bot-field"></label></p>
             <div class="field"><label>Move size *</label>
-              <select>
+              <select name="move_size" required>
                 <option value="">Select…</option>
                 <option>A few items</option>
                 <option>Studio</option>
@@ -309,17 +312,17 @@
               </select>
             </div>
             <div class="row2">
-              <div class="field"><label>Moving from</label><input type="text" placeholder="Seattle / ZIP"></div>
-              <div class="field"><label>Moving to</label><input type="text" placeholder="City / ZIP"></div>
+              <div class="field"><label>Moving from</label><input type="text" name="moving_from" placeholder="Seattle / ZIP"></div>
+              <div class="field"><label>Moving to</label><input type="text" name="moving_to" placeholder="City / ZIP"></div>
             </div>
-            <div class="field"><label>Move date</label><input type="date"></div>
-            <div class="field"><label>Your name</label><input type="text" placeholder="Name"></div>
-            <div class="field"><label>Phone *</label><input type="tel" placeholder="(206) 555-0100"></div>
-            <div class="field"><label>Email</label><input type="email" placeholder="you@email.com"></div>
-            <button class="btn btn-primary" style="width:100%;padding:14px">Get my quote</button>
+            <div class="field"><label>Move date</label><input type="date" name="move_date"></div>
+            <div class="field"><label>Your name</label><input type="text" name="full_name" placeholder="Name"></div>
+            <div class="field"><label>Phone *</label><input type="tel" name="phone" placeholder="(206) 555-0100" required></div>
+            <div class="field"><label>Email</label><input type="email" name="email" placeholder="you@email.com"></div>
+            <button type="submit" class="btn btn-primary" style="width:100%;padding:14px">Get my quote</button>
             <span class="or-call">or <a href="tel:+12065902288">call (206) 590-2288</a></span>
           </div>
-        </div>
+        </form>
       </aside>
     </div>
   </div>

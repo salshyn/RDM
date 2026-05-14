@@ -274,12 +274,15 @@
 
       <!-- Sticky quote sidebar -->
       <aside class="sidebar">
-        <div class="side-quote" id="quote">
+        <form class="side-quote" id="quote" name="home-quote" method="POST" data-netlify="true" netlify-honeypot="bot-field">
       <div class="qhead">
         <h3>Get Your Quote in Minutes</h3>
         <p>Free, no-obligation. We'll call you back fast.</p>
       </div>
       <div class="qbody">
+        <input type="hidden" name="form-name" value="home-quote">
+        <input type="hidden" name="subject" value="New homepage quote request - Rainy Day Movers">
+        <p hidden><label>Don't fill this out: <input name="bot-field"></label></p>
         <div class="steps">
           <div class="step-dot active" data-step="1"></div>
           <div class="step-dot" data-step="2"></div>
@@ -291,21 +294,21 @@
           <div class="row2">
             <div class="field">
               <label>Moving from</label>
-              <input type="text" placeholder="Seattle, WA / ZIP">
+              <input type="text" name="moving_from" placeholder="Seattle, WA / ZIP">
             </div>
             <div class="field">
               <label>Moving to</label>
-              <input type="text" placeholder="City or ZIP">
+              <input type="text" name="moving_to" placeholder="City or ZIP">
             </div>
           </div>
           <div class="row2">
             <div class="field">
               <label>Move date</label>
-              <input type="date">
+              <input type="date" name="move_date">
             </div>
             <div class="field">
               <label>Move size *</label>
-              <select>
+              <select name="move_size" required>
                 <option value="">Select…</option>
                 <option>A few items</option>
                 <option>Studio</option>
@@ -319,7 +322,7 @@
           </div>
           <div class="qfoot">
             <span></span>
-            <button class="btn btn-primary next" data-next="2">Next →</button>
+            <button type="button" class="btn btn-primary next" data-next="2">Next →</button>
           </div>
           <span class="or-call">or <a href="tel:+12065902288">call (206) 590-2288</a></span>
         </div>
@@ -328,21 +331,21 @@
         <div class="quote-step" data-step="2">
           <div class="field">
             <label>Full name</label>
-            <input type="text" placeholder="Your name">
+            <input type="text" name="full_name" placeholder="Your name">
           </div>
           <div class="row2">
             <div class="field">
               <label>Email</label>
-              <input type="email" placeholder="you@email.com">
+              <input type="email" name="email" placeholder="you@email.com">
             </div>
             <div class="field">
               <label>Phone *</label>
-              <input type="tel" placeholder="(206) 555-0100">
+              <input type="tel" name="phone" placeholder="(206) 555-0100" required>
             </div>
           </div>
           <div class="qfoot">
-            <button class="link-back" data-back="1">← Back</button>
-            <button class="btn btn-primary next" data-next="3">Get my quote</button>
+            <button type="button" class="link-back" data-back="1">← Back</button>
+            <button type="submit" class="btn btn-primary">Get my quote</button>
           </div>
           <span class="or-call" style="font-size:11px">By continuing you consent to receive text messages.</span>
         </div>
@@ -356,7 +359,7 @@
           </div>
         </div>
       </div>
-        </div><!-- /.side-quote -->
+        </form><!-- /.side-quote -->
       </aside><!-- /.sidebar -->
     </div><!-- /.page-grid -->
   </div><!-- /.container -->
@@ -838,7 +841,16 @@
     dots.forEach(d=>d.classList.toggle('active', d.dataset.step<=n));
   }
   card.querySelectorAll('[data-next]').forEach(b=>{
-    b.addEventListener('click', e=>{e.preventDefault();goTo(b.dataset.next);});
+    b.addEventListener('click', e=>{
+      e.preventDefault();
+      const currentStep = b.closest('.quote-step');
+      const invalidField = currentStep && currentStep.querySelector(':invalid');
+      if (invalidField) {
+        invalidField.reportValidity();
+        return;
+      }
+      goTo(b.dataset.next);
+    });
   });
   card.querySelectorAll('[data-back]').forEach(b=>{
     b.addEventListener('click', e=>{e.preventDefault();goTo(b.dataset.back);});

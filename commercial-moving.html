@@ -225,15 +225,18 @@
 
       <!-- Sidebar quote form -->
       <aside class="sidebar">
-        <div class="side-quote" id="sidequote">
+        <form class="side-quote" id="sidequote" name="commercial-moving-quote" method="POST" data-netlify="true" netlify-honeypot="bot-field">
           <div class="qhead">
             <h3>Commercial Move Quote</h3>
             <p>We'll schedule a free walk-through.</p>
           </div>
           <div class="qbody">
-            <div class="field"><label>Company name</label><input type="text" placeholder="Your business"></div>
+            <input type="hidden" name="form-name" value="commercial-moving-quote">
+            <input type="hidden" name="subject" value="New commercial move quote request - Rainy Day Movers">
+            <p hidden><label>Don't fill this out: <input name="bot-field"></label></p>
+            <div class="field"><label>Company name</label><input type="text" name="company_name" placeholder="Your business"></div>
             <div class="field"><label>Office size *</label>
-              <select>
+              <select name="office_size" required>
                 <option value="">Select…</option>
                 <option>Up to 5 workstations</option>
                 <option>5–15 workstations</option>
@@ -245,18 +248,18 @@
               </select>
             </div>
             <div class="row2">
-              <div class="field"><label>Moving from (city)</label><input type="text" placeholder="Seattle"></div>
-              <div class="field"><label>Moving to (city)</label><input type="text" placeholder="Bellevue"></div>
+              <div class="field"><label>Moving from (city)</label><input type="text" name="moving_from" placeholder="Seattle"></div>
+              <div class="field"><label>Moving to (city)</label><input type="text" name="moving_to" placeholder="Bellevue"></div>
             </div>
-            <div class="field"><label>Approximate move date</label><input type="date"></div>
-            <div class="field"><label>Your name</label><input type="text" placeholder="Name"></div>
-            <div class="field"><label>Phone *</label><input type="tel" placeholder="(206) 555-0100"></div>
-            <div class="field"><label>Email</label><input type="email" placeholder="you@company.com"></div>
-            <div class="field"><label>Anything specialty? (IT, medical, etc.)</label><textarea rows="3" placeholder="Server racks, dental chairs, lab equipment…"></textarea></div>
-            <button class="btn btn-primary" style="width:100%;padding:14px">Request walk-through</button>
+            <div class="field"><label>Approximate move date</label><input type="date" name="move_date"></div>
+            <div class="field"><label>Your name</label><input type="text" name="full_name" placeholder="Name"></div>
+            <div class="field"><label>Phone *</label><input type="tel" name="phone" placeholder="(206) 555-0100" required></div>
+            <div class="field"><label>Email</label><input type="email" name="email" placeholder="you@company.com"></div>
+            <div class="field"><label>Anything specialty? (IT, medical, etc.)</label><textarea name="message" rows="3" placeholder="Server racks, dental chairs, lab equipment…"></textarea></div>
+            <button type="submit" class="btn btn-primary" style="width:100%;padding:14px">Request walk-through</button>
             <span class="or-call">or <a href="tel:+12065902288">call (206) 590-2288</a></span>
           </div>
-        </div>
+        </form>
       </aside>
     </div>
   </div>

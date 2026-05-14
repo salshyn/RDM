@@ -237,14 +237,17 @@
 
       <!-- Sidebar quote form -->
       <aside class="sidebar">
-        <div class="side-quote" id="sidequote">
+        <form class="side-quote" id="sidequote" name="packing-quote" method="POST" data-netlify="true" netlify-honeypot="bot-field">
           <div class="qhead">
             <h3>Get a Packing Quote</h3>
             <p>Tell us a bit about your home.</p>
           </div>
           <div class="qbody">
+            <input type="hidden" name="form-name" value="packing-quote">
+            <input type="hidden" name="subject" value="New packing quote request - Rainy Day Movers">
+            <p hidden><label>Don't fill this out: <input name="bot-field"></label></p>
             <div class="field"><label>Home size *</label>
-              <select>
+              <select name="home_size" required>
                 <option value="">Select…</option>
                 <option>Studio</option>
                 <option>1 Bedroom</option>
@@ -254,7 +257,7 @@
               </select>
             </div>
             <div class="field"><label>Packing type *</label>
-              <select>
+              <select name="packing_type" required>
                 <option value="">Select…</option>
                 <option>Full pack (everything)</option>
                 <option>Partial — kitchen only</option>
@@ -262,15 +265,15 @@
                 <option>Partial — custom (we'll discuss)</option>
               </select>
             </div>
-            <div class="field"><label>Approximate move date</label><input type="date"></div>
-            <div class="field"><label>Your name</label><input type="text" placeholder="Name"></div>
-            <div class="field"><label>Phone *</label><input type="tel" placeholder="(206) 555-0100"></div>
-            <div class="field"><label>Email</label><input type="email" placeholder="you@email.com"></div>
-            <div class="field"><label>Anything fragile or unusual?</label><textarea rows="3" placeholder="Art, china, instruments, antiques…"></textarea></div>
-            <button class="btn btn-primary" style="width:100%;padding:14px">Request packing quote</button>
+            <div class="field"><label>Approximate move date</label><input type="date" name="move_date"></div>
+            <div class="field"><label>Your name</label><input type="text" name="full_name" placeholder="Name"></div>
+            <div class="field"><label>Phone *</label><input type="tel" name="phone" placeholder="(206) 555-0100" required></div>
+            <div class="field"><label>Email</label><input type="email" name="email" placeholder="you@email.com"></div>
+            <div class="field"><label>Anything fragile or unusual?</label><textarea name="message" rows="3" placeholder="Art, china, instruments, antiques…"></textarea></div>
+            <button type="submit" class="btn btn-primary" style="width:100%;padding:14px">Request packing quote</button>
             <span class="or-call">or <a href="tel:+12065902288">call (206) 590-2288</a></span>
           </div>
-        </div>
+        </form>
       </aside>
     </div>
   </div>
